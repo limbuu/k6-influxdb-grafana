@@ -17,7 +17,7 @@ $ k6 version
 k6 v0.28.0 (2020-09-24T14:33:59+0000/v0.28.0-0-gdee9c4ce, go1.14.9, linux/amd64)
 
 ```
-### Install Influxdb
+### Install InfluxDB
 ```
 $ sudo apt install influxdb
 ```
@@ -55,6 +55,13 @@ To stop the influxd, run command:
 ```
 $ sudo service influxd stop
 ```
+
+### Access InfluxDB
+InfluxDB server runs on localhost, listening on port 8086.
+
+It can be access at http://localhost:8086.
+
+To access influxDB database, use http://localhost:8086/<database-name>
 
 ### Install grafana
 ```
@@ -97,6 +104,25 @@ To stop the grafana.service, run command:
 ```
 $ sudo service grafana-server stop
 ```
+
+### Run Loadtest script and upload the results to InfluxDB
+
+```
+$ k6 run --out influxdb=http://localhost:8086/myk6db script.js
+```
+myk6db is database name, if doesnot exist, k6 will create automatically
+
+### Access the grafana on browser
+
+Grafana server runs on localhost, listening to port 3000.
+
+Grafana dashboard can be accessed on browser at http://localhost:3000
+
+
+
+
+
+
 
 
 
