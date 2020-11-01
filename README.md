@@ -61,7 +61,7 @@ InfluxDB server runs on localhost, listening on port 8086.
 
 It can be access at http://localhost:8086.
 
-To access influxDB database, use http://localhost:8086/<database-name>
+To access influxDB database, use http://localhost:8086/database-name
 
 ### Install grafana
 ```
