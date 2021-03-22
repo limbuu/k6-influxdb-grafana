@@ -1,7 +1,7 @@
 # k6-influxdb-grafana
 We will use k6 as loadtesting tool, influxdb as time series database and grafana for visualization
 
-# A Local Setup 
+# A. Local Setup 
 ## 1) Install K6 (Debian/Ubuntu)
 ```
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
