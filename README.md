@@ -1,8 +1,8 @@
 # k6-influxdb-grafana
 We will use k6 as loadtesting tool, influxdb as time series database and grafana for visualization
 
-## 1. Local Setup 
-### Install K6 (Debian/Ubuntu)
+# A. Local Setup 
+## 1) Install K6 (Debian/Ubuntu)
 ```
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
 $ echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
@@ -17,7 +17,7 @@ $ k6 version
 k6 v0.28.0 (2020-09-24T14:33:59+0000/v0.28.0-0-gdee9c4ce, go1.14.9, linux/amd64)
 
 ```
-### Install InfluxDB
+## 2) Install InfluxDB
 ```
 $ sudo apt install influxdb
 ```
@@ -63,9 +63,18 @@ It can be access at http://localhost:8086.
 
 To access influxDB database, use http://localhost:8086/database-name
 
-### Install grafana
+## 3) Install grafana
 ```
-$ sudo apt install grafana
+# To install OSS release
+$ sudo apt-get install -y apt-transport-https
+$ sudo apt-get install -y software-properties-common wget
+$ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
+# Add this repository for stable releases
+$ echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+$ sudo apt-get update
+$ sudo apt-get install grafana
+
 ```
 
 ### Verify Installation
