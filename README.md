@@ -132,7 +132,7 @@ $ k6 run --out influxdb=http://localhost:8086/myk6db script.js
 myk6db is database name, if doesnot exist, k6 will create automatically
 
 The output on grafana-dashboard looks like this:
-![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafna-dashboard-output.png)
+![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafana-dashboard-output.png)
 
 # B. Cloud Setup (Any Vendors)
 ## 1) Installation
