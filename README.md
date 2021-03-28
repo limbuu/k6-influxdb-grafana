@@ -20,7 +20,7 @@ k6 v0.28.0 (2020-09-24T14:33:59+0000/v0.28.0-0-gdee9c4ce, go1.14.9, linux/amd64)
 
 Now to run a simple loadtest script, run the following command:
 ```
-$ k6 run simple-script.js
+$ k6 run script.js
 ```
 To run with specfic `virtual users` for certain `duration`, run the following command:
 ```
@@ -61,7 +61,7 @@ InfluxDB server runs on localhost, listening on port `8086`.It can be access at 
 To access influxDB database, use `http://localhost:8086/database-name`.
 
 
-## 3) Install grafana(For Visualization)
+## 4) Install grafana(For Visualization)
 ```
 # To install OSS release
 $ sudo apt-get install -y apt-transport-https
@@ -121,18 +121,69 @@ Now, configure grafana dashboard to use `InfluxDB` as datasource.
 And, add `http://localhost:8086` as influxdb url and `myk6db` as database name.  
 ![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/influxdb-setup.png)
 
-## 4) Run Loadtest script with Visualization
+## 5) Run Loadtest script with Better Visualization
 
-We will run relatively advaced loadtest script with virtual users, rps and duration. 
+We will run a loadtest script with virtual users, rps and duration. 
 
 ```
-$ k6 run --out influxdb=http://localhost:8086/myk6db advanced-script.js
+$ k6 run --out influxdb=http://localhost:8086/myk6db script.js
 ```
 myk6db is database name, if doesnot exist, k6 will create automatically
 
  
 The output on grafana-dashboard looks like this:
 ![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafna-dashboard-output.png)
+
+# B. Cloud Setup (Any Vendors)
+## 1) Installation
+For cloud environment setup, install three tools mentioned seprately in the cloud instance (ec2, compute engine, etc) just like in `Local SetUp`.
+* K6
+* Influxdb
+* Grafana
+
+As alternative, you can use script to setup all tools at a time:
+```
+$ chmod +x setup.sh        # make the setup script executable
+$ ./setup.sh               # run the script
+```
+
+Now, check the status of installed tools and reload if stopped:
+```
+$ chmod +x check.sh        # make the check script executable
+$ ./check.sh               # run the script
+```
+
+Note: grafana-server daemon often gets shutdown when the computing instance is shutown and needs to be reloaded after startin the instance again.
+
+## 2) Configuration
+All configurations are same like in `Local SetUp` except for the `localhost` replaced by `static-ip` in both `influxdb` and `grafana`. 
+`Static-IP` is ip address attached to a compute instance that doesnot change, we will use this static-ip to access influxdb and grafana.
+Also create and attach a security group with port 8086 and 3000 opened for influxdb and grafana in cloud compute instance. 
+
+### Access InfluxDB
+InfluxDB server now runs on `static ip`, listening on port `8086`.It can be access at `http://<static-ip>:8086`.
+
+To access influxDB database, use `http://<static-ip>:8086/database-name`.
+
+### Run Loadtest script 
+
+We will run a loadtest script with virtual users, rps and duration. 
+
+```
+$ k6 run --out influxdb=http://<static-ip>:8086/myk6db script.js
+```
+myk6db is database name, if doesnot exist, k6 will create automatically
+
+
+### Access the grafana on browser
+Grafana server runs on static-ip, listening to port `3000`.
+
+Grafana dashboard can be accessed on browser at `http://<static-ip>:3000`.
+
+
+
+
+
 
 
 
