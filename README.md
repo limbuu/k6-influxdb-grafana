@@ -60,8 +60,8 @@ InfluxDB server runs on localhost, listening on port `8086`.It can be access at 
 
 To access influxDB database, use `http://localhost:8086/database-name`.
 
-
 ## 4) Install grafana(For Visualization)
+
 ```
 # To install OSS release
 $ sudo apt-get install -y apt-transport-https
@@ -109,9 +109,11 @@ Grafana dashboard can be accessed on browser at `http://localhost:3000`.
 Use `admin` or anything you like for userame and password.
 ![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafana-login.png)
 
+
 #### - Add Grafana Dashboard
 After successfully signing in grafana dashboard, import Grafana dashboard. 
 We will import dashboard with id:`2587` for testing.
+
 ![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafana-setup1.png)
 
 #### - Add InfluxDB as DataSource
@@ -124,13 +126,11 @@ And, add `http://localhost:8086` as influxdb url and `myk6db` as database name.
 ## 5) Run Loadtest script with Better Visualization
 
 We will run a loadtest script with virtual users, rps and duration. 
-
 ```
 $ k6 run --out influxdb=http://localhost:8086/myk6db script.js
 ```
 myk6db is database name, if doesnot exist, k6 will create automatically
 
- 
 The output on grafana-dashboard looks like this:
 ![alt text](https://github.com/limbuu/k6-influxdb-grafana/blob/main/images/grafna-dashboard-output.png)
 
@@ -153,11 +153,13 @@ $ chmod +x check.sh        # make the check script executable
 $ ./check.sh               # run the script
 ```
 
-Note: grafana-server daemon often gets shutdown when the computing instance is shutown and needs to be reloaded after startin the instance again.
+Note: grafana-server daemon often gets shutdown when the computing instance is shutown and needs to be reloaded after starting the instance again.
 
 ## 2) Configuration
 All configurations are same like in `Local SetUp` except for the `localhost` replaced by `static-ip` in both `influxdb` and `grafana`. 
+
 `Static-IP` is ip address attached to a compute instance that doesnot change, we will use this static-ip to access influxdb and grafana.
+
 Also create and attach a security group with port 8086 and 3000 opened for influxdb and grafana in cloud compute instance. 
 
 ### Access InfluxDB
@@ -179,10 +181,6 @@ myk6db is database name, if doesnot exist, k6 will create automatically
 Grafana server runs on static-ip, listening to port `3000`.
 
 Grafana dashboard can be accessed on browser at `http://<static-ip>:3000`.
-
-
-
-
 
 
 
